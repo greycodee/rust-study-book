@@ -1,0 +1,6 @@
+[book]
+authors = ["greycodee"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Rust Study Book"
