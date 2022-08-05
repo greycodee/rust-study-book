@@ -34,19 +34,14 @@ jobs:
         uses: peaceiris/actions-mdbook@v1.1.13
         with:
           mdbook-version: latest
-      - run: |
-          pwd
-          ls
-          mdbook build
-          pwd
-          ls
+      - run: mdbook build
       - name: Setup Pages
         uses: actions/configure-pages@v1
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: '/book'
+          path: '/home/runner/work/rust-study-book/rust-study-book/book'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@main
