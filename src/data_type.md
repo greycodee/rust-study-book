@@ -46,7 +46,7 @@ println!("{}",TEST_NUMBER);
 ## 变量遮蔽
 Rust 允许声明相同的变量名，在后面声明的变量会遮蔽掉前面声明的，如下所示：
 ```rust
-let x = 1;
+let x = 9;
 let x = x+1;
 println!("{}",x);
 ```
