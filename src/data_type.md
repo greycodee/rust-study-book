@@ -32,6 +32,47 @@ println!("{}",hello);
 
 > **自动推断变量类型**: 可以看到我们在声明变量时，使用了 `let` 关键字，这个关键字告诉编译器，这个变量是一个可变的（mutable）变量，这样编译器就可以自动推断出这个变量的类型。
 
+## 变量遮蔽
+Rust 允许声明相同的变量名，在后面声明的变量会遮蔽掉前面声明的，如下所示：
+```rust
+let x = 9;
+let x = x+1;
+println!("{}",x);
+```
+上面的代码中，会先将 `x` 赋值为 `9`，然后再声明一个相同的变量 `x`, 将当前的 `x` 为 `9` 的变量加 `1` 后在重新赋值给新定义的 `x` 上，最后输出 `10`。
+
+不同于 `mut` 关键字，这中声明变量的方法会在第二次定义 `x` 变量时，在内存空间中开辟出一个新的空间。这样做有好处也有坏处，好处就是可以减少变量名的定义，比如当你只想要知道一个字符串的长度而不需要知道字符串的内容时，我们可以直接这样定义：
+```rust
+let x = "hello";
+let x = x.len();
+println!("字符串长度为: {x}");
+```
+> ⚠️ 当后一个变量遮蔽前一个变量时，我们就无法访问到前一个变量的值。
+
+当你用 `mut` 关键字来实现相同的代码时，编译器就会报错:
+```rust
+let mut x = "hello";
+x = x.len();
+println!("字符串长度为: {x}");
+```
+发生错误：
+```rust,noplayground
+      Compiling playground v0.0.1 (/playground)
+error[E0308]: mismatched types
+ --> src/main.rs:4:5
+  |
+3 | let mut x = "hello";
+  |             ------- expected due to this value
+4 | x = x.len();
+  |     ^^^^^^^ expected `&str`, found `usize`
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `playground` due to previous error
+```
+因为第一个 `let` 已经推断出为们这个变量为字符串类型，但是第二次赋值时是一个 `usize` 类型，与预期类型不符，所以编译器就报错了。
+
+
+变量遮蔽的坏处就如上面所说的，第二次定义变量时，就会在内存中在开辟一个空间来存放新的变量，因为它们本质上就是两个完全不同的变量，只是名字相同而已，然后性能上会有所损失。
 ## 常量
 常量遵循如下规则：
 - 常量的值是不可变的
@@ -43,14 +84,6 @@ println!("{}",hello);
 const TEST_NUMBER:i32 = 123;
 println!("{}",TEST_NUMBER);
 ```
-## 变量遮蔽
-Rust 允许声明相同的变量名，在后面声明的变量会遮蔽掉前面声明的，如下所示：
-```rust
-let x = 9;
-let x = x+1;
-println!("{}",x);
-```
-
 ## 基础数据类型
 Rust 有四种主要的基础类型：整数、浮点数、布尔值和字符。
 ### 整数
