@@ -1,5 +1,5 @@
 # 学习 Rust 中的笔记
-本文档使用和 Rust 官方文档同样的 mdbook 来编写，文中大部分代码可直接运行。
+本文档使用和 Rust 官方文档同样的 [mdbook](https://rust-lang.github.io/mdBook/index.html) 来编写，文中大部分代码可直接运行。
 
 主要参考资料是官方文档：[https://doc.rust-lang.org/book/](https://doc.rust-lang.org/book/)
 
