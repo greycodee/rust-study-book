@@ -151,3 +151,32 @@ fn main(){
     println!("{:?}",user)
 }
 ```
+
+## 使用impl定义方法
+可以使用 `impl` 关键字来定义结构体的方法，同时可以同时定义多个 `impl` 块
+```rust
+struct User {
+    name: String,
+    age: u32,
+}
+
+impl User {
+    fn new(name: String, age: u32) -> User {
+        User { name, age }
+    }
+}
+impl User {
+    fn say_hello(&self) {
+        println!("Hello, my name is {} and I am {} years old.", self.name, self.age);
+    }
+}
+    
+fn main() {
+    // 当方法返回的是结构体本身时，要用 :: 来调用
+    let user = User::new(String::from("John"), 30);
+    println!("{} is {} years old", user.name, user.age);
+
+    user.say_hello();
+}
+```
+
